@@ -15,10 +15,12 @@ public class Curso {
     private String nombreCurso;
     private int duracion; // Duración en horas
     private double costoCurso;
+    private Date fechaInscripcion;
 
     public Curso() {
     }
 
+    
     public Curso(String nombreCurso, int duracion, double costoCurso) {
         this.nombreCurso = nombreCurso;
         this.duracion = duracion;
@@ -67,7 +69,11 @@ public class Curso {
         this.costoCurso = costoCurso;
     }
 
-    public void setFechaInscripcion(Date date) {
-        //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      public Date getFechaInscripcion() {
+        return fechaInscripcion;
+    }
+
+    public void setFechaInscripcion(Date fechaInscripcion) {
+        this.fechaInscripcion = fechaInscripcion;
     }
 }

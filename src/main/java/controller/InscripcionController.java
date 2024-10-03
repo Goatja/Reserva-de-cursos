@@ -89,7 +89,13 @@ public class InscripcionController extends HttpServlet {
             
             // Establecer la lista de cursos como atributo
             request.setAttribute("cursosInscritos", cursosInscritos);
-
+            
+            if(cursosInscritos.isEmpty()){
+                System.out.println("esta vacio");
+            }else{
+                System.out.println(cursosInscritos);
+            }
+            
             // Redirigir a la JSP que muestra los cursos inscritos
             RequestDispatcher dispatcher = request.getRequestDispatcher("cursosInscrito.jsp");
             dispatcher.forward(request, response);
@@ -103,6 +109,22 @@ public class InscripcionController extends HttpServlet {
        }else if ("curso".equals(action)){
            response.sendRedirect(request.getContextPath() + "/CursoController");
        
+       }else if ("verInscritos".equals(action)){
+           CursoDAO cursoDAO = new CursoDAO();
+                InscripcionDAO inscripcionDAO = new InscripcionDAO();
+
+                // Obtener la lista de inscripciones y cursos
+                ArrayList<Inscripcion> inscritos = inscripcionDAO.consultaGeneral();
+                ArrayList<Curso> cursos = cursoDAO.consultaGeneral();
+
+                // Establecer los atributos en el request
+                request.setAttribute("inscritos", inscritos); 
+                
+
+                // Redirigir a la JSP correspondiente
+                RequestDispatcher dispatcher = request.getRequestDispatcher("verInscritos.jsp");
+                dispatcher.forward(request, response);
+           
        }else{
                 CursoDAO cursoDAO = new CursoDAO();
                 InscripcionDAO inscripcionDAO = new InscripcionDAO();

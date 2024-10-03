@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Cursos</title>
+    <title>Gestiï¿½n de Cursos</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
 </head>
 <body>
 <div class="container mt-5">
-    <h2>Gestión de Cursos</h2>
+    <h2>Gestiï¿½n de Cursos</h2>
 
     <!-- Formulario para agregar un nuevo curso -->
     <form action="CursoController" method="POST" class="mb-4">
@@ -21,7 +21,7 @@
                 <input type="text" class="form-control" id="nombre" name="nombre" required>
             </div>
             <div class="form-group col-md-4">
-                <label for="duracion">Duración (horas)</label>
+                <label for="duracion">Duraciï¿½n (horas)</label>
                 <input type="number" class="form-control" id="duracion" name="duracion" required>
             </div>
             <div class="form-group col-md-4">
@@ -32,7 +32,7 @@
         <button type="submit" class="btn btn-primary">Agregar Curso</button>
     </form>
 
-    <!-- Botón para ir a Inscribir -->
+    <!-- Botn para ir a Inscribir -->
     <a href="CursoController?action=inscripcion" class="btn btn-success mb-3">Ir a Inscribir Cursos</a>
 
     <!-- Tabla de cursos -->
@@ -41,7 +41,7 @@
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
-                <th>Duración</th>
+                <th>Duraciï¿½n</th>
                 <th>Costo</th>
                 <th>Acciones</th>
             </tr>
@@ -58,7 +58,7 @@
                         <form action="CursoController" method="post" style="display:inline;">
                             <input type="hidden" name="id" value="${curso.idCurso}">
                             <input type="hidden" name="action" value="eliminar">
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Está seguro de eliminar este curso?');">Eliminar</button>
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('ï¿½Estï¿½ seguro de eliminar este curso?');">Eliminar</button>
                         </form>
                     </td>
                 </tr>

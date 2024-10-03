@@ -101,35 +101,39 @@ public class CursoDAO {
     }
     
     
-   public ArrayList<Curso> obtenerCursosConInscritos() throws SQLException {
+ public ArrayList<Curso> obtenerCursosConInscritos() throws SQLException {
     ArrayList<Curso> cursos = new ArrayList<>();
     
-     String sql = "SELECT c.ID_Curso, c.Nombre_Curso, c.Duracion, c.Costo, i.Fecha_Inscripción " +
-                 "FROM Cursos c " +
-                 "JOIN Inscripciones i ON c.ID_Curso = i.Curso_ID " +
-                 "GROUP BY c.ID_Curso, i.Fecha_Inscripción"; // Agrupar también por la fecha de inscripción = ?";
-            ps = cn.getConnection().prepareStatement(sql);
-            ResultSet rs = ps.executeQuery(sql);
-   
-
+    String sql = "SELECT Cursos.ID_Curso, Cursos.Nombre_Curso, Cursos.Duración, Cursos.Costo_Curso, Inscripciones.Fecha_Inscripción " +
+                 "FROM Cursos " +
+                 "INNER JOIN Inscripciones ON Cursos.ID_Curso = Inscripciones.Curso_ID";
+    
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    
     try {
+        ps = cn.getConnection().prepareStatement(sql);
+        rs = ps.executeQuery();
         
-
         while (rs.next()) {
             Curso curso = new Curso();
-            curso.setIdCurso(rs.getInt("ID_Curso"));
+            curso.setIdCurso(rs.getInt("ID_Curso"));  // Asegúrate de tener este método en la clase Curso
             curso.setNombreCurso(rs.getString("Nombre_Curso"));
-            curso.setDuracion(rs.getInt("Duracion"));
-            curso.setCostoCurso(rs.getDouble("Costo"));
-            curso.setFechaInscripcion(rs.getDate("Fecha_Inscripción")); // Asegúrate de que este método exista en tu clase Curso
+            curso.setDuracion(rs.getInt("Duración"));
+            curso.setCostoCurso(rs.getDouble("Costo_Curso"));
+            curso.setFechaInscripcion(rs.getDate("Fecha_Inscripción")); // Asegúrate de que este método exista en la clase Curso
 
             cursos.add(curso);
         }
     } catch (SQLException e) {
         e.printStackTrace();
-        // Manejo de errores, puedes lanzar una excepción o loguear
+        // Manejo de errores
+    } finally {
+        if (rs != null) rs.close(); // Cierra el ResultSet
+        if (ps != null) ps.close(); // Cierra el PreparedStatement
     }
     return cursos;
 }
+
 
 }
